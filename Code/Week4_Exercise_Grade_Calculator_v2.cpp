@@ -50,22 +50,63 @@ int main() {
 	cout << "Please enter the number of homework assignments (3 - 10): ";
 	cin >> nHW;
 
-	// HINT: a loop should appear here
-	cout << "Please enter the homework [i] score (0 - 100): "; // [i] should change in the loop
-	// cin >> [some variable here];
-	// HINT: find the lowest HW score and manage the sum in the loop as well
-	//       to avoid introducing unnecessary "arrays" or "vectors"
-
-
+	double hw_sum = 0., hw_min = 101;
+	for (int i = 0; i < nHW; ++i) {
+		double hw_score = 0.;
+		cout << "Please enter the homework " << i+1 << " score(0 - 100) : ";
+		cin >> hw_score;
+		hw_sum += hw_score; // accumulate the scores
+		if (hw_score < hw_min) { // find the minimum
+			hw_min = hw_score;
+		}
+	}
+	double avg_hw_score = (hw_sum - hw_min) / (nHW - 1.); // average without the lowest score (hw_min)
+	
 	// print out the final scores from two schemes
-	cout << "Your final score based on Scheme A is ";
-	cout << "Your final score based on Scheme B is ";
+	double scheme_A = 0.3 * mid + 0.4 * fin + 0.3 * avg_hw_score,
+		scheme_B = 0.7 * fin + 0.3 * avg_hw_score;
+	cout << "Your final score based on Scheme A is " << scheme_A << endl;
+	cout << "Your final score based on Scheme B is " << scheme_B << endl;
 
 	// print out the final score and the letter grade
-	cout << " Your final score is ";
-	cout << "Your course grade is ";
-	// Challenge: Can you replace the if-elseif-else clauses for letter grade
-	//            by a single expression here? (without switch-case)
+	double score_final = (scheme_A > scheme_B) ? scheme_A : scheme_B; // ternary operator to find max
+	cout << " Your final score is " << score_final << endl;
+	char letter_grade = 'x'; // initialize with a default value that can easily indicate possible errors
+	// (i.e. a character that doesn't exist in the grade letters)
 
+	if (score_final > 100) { // check validity
+		cout << "Error! Final score cannot exceed 100." << endl;
+	}
+	else if (score_final < 0) { // check validity
+		cout << "Error! Final score cannot be negative." << endl;
+	}
+	else { // if between 0 and 100,
+		if (score_final >= 90) {
+			letter_grade = 'A';
+		}
+		else if (score_final >= 80) {
+			letter_grade = 'B';
+		}
+		else if (score_final >= 70) {
+			letter_grade = 'C';
+		}
+		else if (score_final >= 60) {
+			letter_grade = 'D';
+		}
+		else {
+			letter_grade = 'F';
+		}
+		// Challenge: Assuming validity, can you replace the if-elseif-else clauses for letter grade
+		//            by a single expression here? (without switch-case)
+		// Possible Answer:
+		//letter_grade =
+		//	  (score_final >= 90) * 'A'
+		//	+ (score_final < 90 && score_final >= 80) * 'B'
+		//	+ (score_final < 80 && score_final >= 70) * 'C'
+		//	+ (score_final < 70 && score_final >= 60) * 'D'
+		//	+ (score_final < 60) * 'F';
+		// how/why does this work?
+	}
+	cout << "Your course grade is " << letter_grade << endl;
 	return 0;
 }

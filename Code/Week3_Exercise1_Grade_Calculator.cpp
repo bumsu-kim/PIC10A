@@ -61,15 +61,42 @@ int main() {
 	int number_of_hw = 2; // define a variable to avoid "magic numbers"
 	double avg_hw_score = (hw1 + hw2 + hw3 - lowest_hw_score)/number_of_hw; // take the average hw score
 
-	// This part will be continued on Thursday!
-	
 	// print out the final scores from two schemes
-	cout << "Your final score based on Scheme A is ";
-	cout << "Your final score based on Scheme B is ";
+	double scheme_A = 0.3 * mid + 0.4 * fin + 0.3 * avg_hw_score,
+		scheme_B = 0.7 * fin + 0.3 * avg_hw_score;
+	cout << "Your final score based on Scheme A is " << scheme_A << endl;
+	cout << "Your final score based on Scheme B is " << scheme_B << endl;
 
 	// print out the final score and the letter grade
-	cout << " Your final score is ";
-	cout << "Your course grade is ";
+	double score_final = (scheme_A > scheme_B) ? scheme_A : scheme_B; // ternary operator to find max
+	cout << " Your final score is " << score_final << endl; 
+	char letter_grade = 'x'; // initialize with a default value that can easily indicate possible errors
+	// (i.e. a character that doesn't exist in the grade letters)
+
+	if (score_final > 100) { // check validity
+		cout << "Error! Final score cannot exceed 100." << endl;
+	}
+	else if (score_final < 0) { // check validity
+		cout << "Error! Final score cannot be negative." << endl;
+	} else { // if between 0 and 100,
+		if (score_final >= 90) {
+			letter_grade = 'A';
+		}
+		else if (score_final >= 80) {
+			letter_grade = 'B';
+		}
+		else if (score_final >= 70) {
+			letter_grade = 'C';
+		}
+		else if (score_final >= 60) {
+			letter_grade = 'D';
+		}
+		else {
+			letter_grade = 'F';
+		}
+	}
+	
+	cout << "Your course grade is " << letter_grade << endl;
 
 	return 0;
 }
