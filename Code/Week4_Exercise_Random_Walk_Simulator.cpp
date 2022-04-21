@@ -1,0 +1,56 @@
+/*
+* PIC10A 1A, Spring 2022, UCLA
+* TA: Bumsu Kim
+*
+* Exercise: Random Walk Simulator
+*
+* Write a program that simulates 1-D random walk:
+*  - An object can only move forward or backward at each step
+*  - When the object hits the wall (upper/lower bounds), it stops walking
+* 
+* FYI: The time that it hits the wall is called the "stopping time"
+*    and it is an important object in mathematical finance.
+* 
+*/
+
+#include <iostream>
+#include <ctime> // time()
+#include <cstdlib> // srand() and rand()
+
+using namespace std;
+
+/** This is a helper function. You can ignore this part */
+inline void print_current_state(int upper, int lower, int pos);
+
+int main() {
+	int upper = 10, lower = -10, pos = 0, stopping_time = 0;
+	cout << "Enter the upper bound: ";
+	cin >> upper;
+	cout << "Enter the lower bound: ";
+	cin >> lower;
+
+	print_current_state(upper, lower, pos);
+	while(/* some condition */) {
+		// simulate the random walk here
+		
+
+
+		// print
+		print_current_state(upper, lower, pos);
+	}
+	cout << "Stopping time: " << stopping_time << endl;
+
+	return 0;
+}
+
+
+// Ignore this helper function implementation
+inline void print_current_state(int upper, int lower, int pos) {
+	int curr = lower;
+	cout << ((pos == lower) ? 'o' : '|');
+	while (++curr < upper) {
+		cout << ((pos == curr) ? 'o' : '-');
+	}
+	cout << ((pos == upper) ? 'o' : '|');
+	cout << endl;
+}
