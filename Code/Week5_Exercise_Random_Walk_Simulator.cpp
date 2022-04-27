@@ -23,6 +23,9 @@ using namespace std;
 inline void print_current_state(int upper, int lower, int pos);
 
 int main() {
+	// don't forget to set the seed
+	srand(time(nullptr));
+
 	int upper = 10, lower = -10, pos = 0, stopping_time = 0;
 	cout << "Enter the upper bound: ";
 	cin >> upper;
@@ -30,10 +33,17 @@ int main() {
 	cin >> lower;
 
 	print_current_state(upper, lower, pos);
-	while(/* some condition */) {
+	while( pos < upper && pos > lower) { // while in the range (bdry not inclusive)
 		// simulate the random walk here
-		
+		if (rand() % 2 == 0) { // 50% chance to have this
+			++pos; // move forward
+		}
+		else {
+			--pos; // move backward
+		}
 
+		// count the number of steps (time)
+		++stopping_time;
 
 		// print
 		print_current_state(upper, lower, pos);
