@@ -27,7 +27,7 @@ int main() {
 		cnt = 0; // counts the number of non-duplicate data
 
 	while (cin >> n && cnt<MAX_SIZE) {
-		if (!has_member(arr, cnt, n)) { // cnt is the size of the array
+		if (!has_member(arr, cnt, n)) { // if arr doesn't have n, (cnt is the size of the array)
 			arr[cnt++] = n; // put n in arr and increment cnt 
 			cout << "cnt = " << cnt << ", added " << n << endl;
 		}
