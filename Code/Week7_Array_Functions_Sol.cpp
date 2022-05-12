@@ -62,8 +62,9 @@ void swap(int& a, int& b) {
 */
 void sort(int arr[], int sz) {
 	for (int idx = 0; idx < sz; ++idx) {
-		int max_idx = find_max_idx(arr, idx + 1, sz);
+		int max_idx = find_max_idx(arr, idx, sz);
 		swap(arr[idx], arr[max_idx]);
+		// print(arr, 0, sz); // print the intermediate state when you want to debug
 	}
 }
 int main() {
