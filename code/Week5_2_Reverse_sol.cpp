@@ -1,0 +1,47 @@
+/*
+* PIC10A 2B, Fall 2022, UCLA
+* TA: Bumsu Kim
+*
+* Exercise: Reverse
+*
+* Write a function that reverses an input string
+*
+*/
+
+#include <iostream>
+#include <string> // don't forget to include this
+
+using namespace std;
+
+/**
+* swaps two characters
+* 
+* @param two characters of type ref_to_char
+*/
+void swap(char& a, char& b) {
+	char c = a;
+	a = b;
+	b = c;
+}
+
+// The following is a documentation of a function in a standard (doxygen) style
+/**
+* Reverses the input string
+*
+* @param	str		Input string to be reversed
+*/
+void reverse(string& str) {
+	int sz = str.size();
+	for (int i = 0; i < sz / 2; ++i) {
+		// read characters from the beginning (i)
+		// and from the end (sz-1-i)
+		swap(str[i], str[sz - 1 - i]); // and swap them
+	}
+}
+int main() {
+	cout << "Enter a string: ";
+	string str; cin >> str;
+	reverse(str);
+	cout << "Reversed: " << str << endl;
+	return 0;
+}
